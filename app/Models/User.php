@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Jenssegers\Mongodb\Eloquent;
 
+// use Jenssegers\Mongodb\Eloquent\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
