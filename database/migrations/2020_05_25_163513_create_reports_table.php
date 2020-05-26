@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Jenssegers\Mongodb\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateReportsTable extends Migration
@@ -13,14 +13,15 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('post_id')->unsigned();
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->text('content');
-            $table->timestamps();
+        Schema::create('reports', function (Blueprint $collection) {
+            // $collection->bigIncrements('id');
+            $collection->index('user_id');
+            $collection->index('post_id');
+            $collection->text('content');
+            $collection->timestamps();
+
+            $collection->foreign('user_id')->references('id')->on('users');
+            $collection->foreign('post_id')->references('id')->on('posts');
         });
     }
 

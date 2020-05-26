@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Jenssegers\Mongodb\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateVotesTable extends Migration
@@ -13,14 +13,14 @@ class CreateVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('post_id')->unsigned();
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->integer('upvote')->default(1);
-            $table->integer('downvote')->default(-1);
+        Schema::create('votes', function (Blueprint $collection) {
+            //$collection->bigIncrements('id');
+            $collection->index('user_id');
+            $collection->index('post_id');
+            $collection->integer('value');
+
+            $collection->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $collection->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 
