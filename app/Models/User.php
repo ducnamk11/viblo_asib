@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Eloquent;
+namespace App\Models;
 
 // use Jenssegers\Mongodb\Eloquent\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
