@@ -16,9 +16,10 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $collection) {
             // $table->bigIncrements('id');
             $collection->index('user_id');
+            $collection->string('title');
             $collection->text('content');
             $collection->string('image');
-            $collection->boolean('status');
+            $collection->boolean('status'); // Trạng thái này để làm gì, có nhiều hơn 2 trạng thái k?
             $collection->dateTime('publish_at')->nullable();
             $collection->timestamps();
 
