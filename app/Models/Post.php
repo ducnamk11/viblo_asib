@@ -18,15 +18,18 @@ class Post extends Model
         'title', 'content', 'image', 'status'
     ];
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function reports() {
+    public function reports()
+    {
         return $this->hasMany('App\Models\Report');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 }
