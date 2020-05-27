@@ -9,6 +9,15 @@ class Post extends Model
 {
     protected $guarded = [];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'content', 'image', 'status'
+    ];
+
     public function comments() {
         return $this->hasMany('App\Models\Comment');
     }
@@ -20,5 +29,4 @@ class Post extends Model
     public function user() {
         return $this->belongsTo('App\Models\User');
     }
- 
 }
