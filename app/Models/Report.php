@@ -6,6 +6,13 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class Report extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['content'];
+
     public function post()
     {
         return $this->belongsTo(Post::class);
