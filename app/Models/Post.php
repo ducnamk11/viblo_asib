@@ -11,6 +11,8 @@ class Post extends Model
 
     /**
      * The attributes that are mass assignable.
+     * 
+     * @todo remove user_id fillable, lý do: user_id không nên để người dùng điền, rất dễ bị hack
      *
      * @var array
      */

@@ -32,14 +32,23 @@ class PostController extends Controller
         return view('users.post.create');
     }
 
+    /**
+     * Create post from user request
+     * 
+     * @todo chuyển phương thức này vào \App\Http\Controller\User\PostController
+     *
+     * @param \App\Http\Requests\StorePostRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StorePostRequest $request)
     {
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'status' => 0,
-            'user_id' => $request->user()->id,
-        ]);
+        /**
+         * sử dụng relationship để tạo post
+         * thuộc tính user_id sẽ tự động điền
+         * @see https://github.com/ducnamk11/viblo_asib/blob/dev/example.php
+         */
+        user()->posts()->create($request->all());
+
         return redirect()->route('index');
     }
 }
