@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $collection) {
             // $table->bigIncrements('id');
             $collection->index('user_id');
+            $collection->integer('find_key')->unique(); // make auto increment this field in controller
             $collection->string('title');
             $collection->text('content');
             $collection->string('image');
