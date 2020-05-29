@@ -1,7 +1,6 @@
 <?php
 
 Auth::routes();
-
 Route::get('/login/social/{provider}', 'Auth\LoginSocialController@redirectToProvider');
 Route::any('/login/social/{provider}/callback', 'Auth\LoginSocialController@handleProviderCallback');
 

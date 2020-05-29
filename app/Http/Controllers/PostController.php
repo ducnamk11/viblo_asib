@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function getLatestPost(int $postNum = 4)
     {
-        return Post::with('user')->where('status',0)->latest()->take($postNum)->get();
+        return Post::with('user')->where('status', 0)->latest()->take($postNum)->get();
     }
 
     public function index()
@@ -42,4 +42,5 @@ class PostController extends Controller
         ]);
         return redirect()->route('index');
     }
+
 }
