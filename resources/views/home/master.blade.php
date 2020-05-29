@@ -11,23 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
-
-
 </head>
 <body>
 
-@include('frontend.layouts.nav')
-
-
+@include('layouts.navHeader')
+@include('layouts.navBottom')
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-md-8">
             @yield('main')
         </div>
-        @include('frontend.layouts.right-menu')
+        @include('layouts.rightMenu')
 
     </div>
 </div>
-@include('frontend.layouts.footer')
+@include('layouts.footer')
 </body>
 </html>

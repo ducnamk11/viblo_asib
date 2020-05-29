@@ -8,54 +8,38 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected $post;
-
-    /**
-     * PostController constructor.
-     * @param Post $post
-     */
-    public function __construct(Post $post)
+    public function getLatestPost(int $postNum = 4)
     {
-        $this->post = $post;
-        $this->new_post = $post->with('user')
-            ->orderBy('created_at', 'desc')
-            ->take(4)->get();
+        return Post::with('user')->where('status',0)->latest()->take($postNum)->get();
     }
 
     public function index()
     {
-        $new_post = $this->new_post;
-        $posts = $this->post->with('user') ->paginate(10);
-        return view('frontend.index', compact('posts', 'new_post'));
+        return view('home.index', [
+            'posts' => Post::with('user')->paginate(10),
+            'new_post' => $this->getLatestPost()]);
     }
 
-    /**
-     * @param $_id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function post_detail($_id)
+    public function postDetail($_id)
     {
-        $new_post = $this->new_post;
-        $post = $this->post->where('_id', $_id)->first();
-        return view('frontend.post', compact('new_post', 'post'));
+        return view('home.post', [
+            'post' => Post::FindOrFail($_id),
+            'new_post' => $this->getLatestPost()]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function create()
     {
-        $right_menu = true;
-        $new_post = $this->new_post;
-        return view('frontend.post_create', compact('new_post', 'right_menu'));
+        return view('users.post.create');
     }
 
-    /**
-     * @param StorePostRequest $request
-     */
-    public function store( StorePostRequest $request)
+    public function store(StorePostRequest $request)
     {
-
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'status' => 0,
+            'user_id' => $request->user()->id,
+        ]);
+        return redirect()->route('index');
     }
-
 }

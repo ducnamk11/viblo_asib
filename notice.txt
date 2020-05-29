@@ -1,0 +1,17 @@
+Route xem bài viết: /p/{post-name-with-id}
+xem user: /u/{username}
+route về người dùng hiện tại: /me
+route về hành động liên quan đến post: /me/post
+để mỗi route về /me thì thêm auth vô
+Route::group(['prefix' => 'me', 'middleware' => 'auth'], ....);
+
+
+set Name:
+h tên method cố viết theo kiểuNày() tênBiếnCũngThế
+trừ các tên trường trong database
+thì viết theo kiểu_này, okey?
+
+
+phần home và user đều có layouts riêng nha
+trong user lại có thư mục post nữa
+gồm các blade: view, edit, create
