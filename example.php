@@ -7,11 +7,16 @@
 /**
  * Function user() đã được thêm vào tại app\Helpers\Authenticatable.php
  * Chức năng trả về model user đã đăng nhập hoặc null nếu chưa đăng nhập
- * Với mọi hành động đến từ user này có thể thông qua hàm này
+ * Với mọi hành động đến từ user đã đăng nhập có thể thông qua hàm này
  */
 
 /**
- * Lấy tất cả post từ user này
+ * lấy hết thông tin user hiện tại
+ */
+user()->toArray();
+
+/**
+ * Lấy tất cả post từ user đã đăng nhập
  */
 $posts = user()->posts()->get();
 
