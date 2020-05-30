@@ -10,28 +10,30 @@ class Post extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that are mass assignable.
-     * 
-     * @todo remove user_id fillable, lý do: user_id không nên để người dùng điền, rất dễ bị hack
-     *
-     * @var array
+     * status post has published
      */
-    protected $fillable = [
-        'title', 'content', 'image', 'status', 'user_id'
-    ];
+    const PUBLISHED = 1;
+
+    /**
+     * status post not publish yet
+     */
+    const NOT_PUBLISHED = 0;  
+
+    protected $fillable = [ 'title', 'content', 'image' ];
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     public function reports()
     {
-        return $this->hasMany('App\Models\Report');
+        return $this->hasMany(Report::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
+
 }
