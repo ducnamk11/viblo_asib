@@ -13,7 +13,7 @@
     <script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
 </head>
 <body>
-@include('layouts.navHeader')
+@include('layouts.nav-header')
 
 @yield('main')
 

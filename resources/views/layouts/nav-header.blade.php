@@ -47,13 +47,13 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <button class="dropdown-item" type="button">
-                        <a href="{{ route('account.index') }}">Account</a>
+                        <a href="{{ route('user.account.index') }}">Account</a>
                     </button>
                     <button class="dropdown-item" type="button">
-                        <a href="{{ route('post.create') }}">Create Post</a>
+                        <a href="{{ route('user.post.create') }}">Create Post</a>
                     </button>
                     <button class="dropdown-item" type="button">
-                        <a href="{{ route('post.create') }}">Some thing</a>
+                        <a href="{{ route('user.post.create') }}">Some thing</a>
                     </button>
                 </div>
             </div>

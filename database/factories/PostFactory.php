@@ -11,7 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->paragraph(1, true),
         'content' => $faker->paragraph(5, true),
         'image' => '1.png',
-        'status' => true,
+        'status' => 1,
         'publish_at' => null,
     ];
 });

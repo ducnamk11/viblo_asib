@@ -17,7 +17,7 @@ class Post extends Model
     /**
      * status post not publish yet
      */
-    const NOT_PUBLISHED = 0;  
+    const NOT_PUBLISHED = 0;
 
     protected $fillable = [ 'title', 'content', 'image' ];
 
