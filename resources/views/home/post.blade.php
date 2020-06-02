@@ -5,7 +5,7 @@
             <h2 class="blog-post-title">{{$post->title}}</h2>
             <p class="blog-post-meta">
                 {{ $post->created_at}} by
-                <a href="#">{{ $post->user->username}}</a>
+                <a href="{{route('author.index',['_id'=>$post->user->_id])}}">{{ $post->user->username}}</a>
             </p>
             <div class="content-post">{!! $post->content !!}</div>
         </div>

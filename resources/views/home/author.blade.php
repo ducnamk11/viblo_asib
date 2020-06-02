@@ -5,7 +5,7 @@
             <img src="https://www.w3schools.com/cssref/pineapple.jpg" style="height: 80px; width: 80px "
                  class="rounded-circle float-left">
             <div class="float-left ml-5">
-                <p><a href="#" class="card-link"><h3>{{$user->name}}</h3></a></p>
+                <p><a href="#" class="card-link"><h3>{{$user->username}}</h3></a></p>
                 <p><a href="#" class="card-link">Report</a></p>
             </div>
         </div>
@@ -13,8 +13,7 @@
     <div style="margin-top: 90px">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
             <ul class="navbar-nav mx-auto col-md-6 ">
-                <li class="nav-item"><a class="nav-link" href="#">Edit</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Follow</a></li>
+                 <li class="nav-item"><a class="nav-link" href="#">Follow</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Question</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Question</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Post</a></li>
@@ -26,8 +25,8 @@
 
             {{--            LIST POST--}}
 
-            <div class="col-md-8 border">
-                <h3>YOUR POST</h3>
+            <div class="col-md-8 ">
+                <h3>{{$user->username}} of POST</h3>
                 @foreach($posts as $post )
                     <div class="card flex-md-row  box-shadow h-md-250">
                         <div class="card-body d-flex flex-column align-items-start">

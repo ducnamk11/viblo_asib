@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -10,10 +11,10 @@ class HomeController extends Controller
     /**
      * Vì nhận thấy hầu hết method trong đây đều dùng $this->getLatestPost()
      * Nên ta sẽ share ở trong contruct luôn theo nguyên lý DRY, cai nay hieu roi , ok
-     * 
+     *
      */
     public function __construct() {
-        view()->share('new_post', $this->getLatestPost(4)); 
+        view()->share('new_post', $this->getLatestPost(4));
     }
 
     public function index()
@@ -27,12 +28,19 @@ class HomeController extends Controller
     {
         return view('home.post', [
             'post' => Post::FindOrFail($_id),
+         ]);
+    }
+    public function authorDetail($_id)
+    {
+         return view('home.author', [
+            'user' => User::FindOrFail($_id),
+            'posts' => User::FindOrFail($_id)->posts,
         ]);
     }
 
     /**
      * Show the application dashboard.
-     * 
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     private function getLatestPost(int $postNum = 4)
