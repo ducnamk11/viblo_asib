@@ -14,14 +14,14 @@
 </head>
 <body>
 
-@include('layouts.navHeader')
-@include('layouts.navBottom')
+@include('layouts.nav-header')
+@include('home.layouts.nav-bottom')
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-md-8">
             @yield('main')
         </div>
-        @include('layouts.rightMenu')
+        @include('home.layouts.right-menu')
 
     </div>
 </div>
