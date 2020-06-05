@@ -19,7 +19,6 @@ class CreateCommentsTable extends Migration
             $collection->index('post_id');
             $collection->text('content');
             $collection->timestamps();
-
             $collection->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $collection->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
