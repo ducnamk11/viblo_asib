@@ -5,19 +5,19 @@
             <h2 class="blog-post-title">{{$post->title}}</h2>
             <p class="blog-post-meta">
                 {{ $post->created_at}} by
-                <a href="{{route('author.index',['_id'=>$post->user->_id])}}">{{ $post->user->username}}</a>
+                <a href="{{route('author.index',['_id'=>$post->user->_id])}}">
+                    {{ $post->user->username}}
+                </a>
             </p>
             <div class="content-post">{!! $post->content !!}</div>
         </div>
     </div>
 </div>
 
-{{--    COMMENT BOX--}}
-
 <div class="row comment my-5">
     @if(user())
     <h4>Write comment</h4>
-    <div class="col-lg-10 col-10 ">
+    <div class="col-lg-10 col-10">
         <textarea
             type="text"
             class="form-control"
@@ -27,14 +27,15 @@
     </div>
     @else
     <h4><a href="">Login to comment</a></h4>
-    <div class="col-lg-10 col-10 ">
+    <div class="col-lg-10 col-10">
         <textarea
             type="text"
             disabled
             class="form-control"
             placeholder="write comments ..."
             rows="5"
-        ></textarea>
+        >
+        </textarea>
     </div>
     @endif
 
@@ -44,5 +45,4 @@
         ></a>
     </div>
 </div>
-{{--  END  COMMENT BOX--}}
 @stop

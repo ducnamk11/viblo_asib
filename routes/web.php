@@ -6,9 +6,8 @@ Route::any('/login/social/{provider}/callback', 'Auth\LoginSocialController@hand
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::prefix('p')->group(function () {
-    Route::get('/{_id}', 'HomeController@postDetail')->name('post.detail');
+    Route::get('/{slug}/{_id}', 'HomeController@postDetail')->name('post.detail');
     Route::get('/author/{_id}', 'HomeController@authorDetail')->name('author.index');
-
 });
 
 /**

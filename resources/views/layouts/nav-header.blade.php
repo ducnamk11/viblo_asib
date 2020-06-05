@@ -1,4 +1,4 @@
-<nav class=" navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-md-8 mx-auto">
         <div
             class="collapse navbar-collapse navbar-ex1-collapse auto"
@@ -50,7 +50,9 @@
                         <a href="{{ route('user.account.index') }}">Account</a>
                     </button>
                     <button class="dropdown-item" type="button">
-                        <a href="{{ route('user.post.create') }}">Create Post</a>
+                        <a href="{{ route('user.post.create') }}"
+                            >Create Post</a
+                        >
                     </button>
                     <button class="dropdown-item" type="button">
                         <a href="{{ route('user.post.create') }}">Some thing</a>
