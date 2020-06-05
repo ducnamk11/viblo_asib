@@ -7,12 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 
 class HomeController extends Controller
-{
-    /**
-     * Vì nhận thấy hầu hết method trong đây đều dùng $this->getLatestPost()
-     * Nên ta sẽ share ở trong contruct luôn theo nguyên lý DRY, cai nay hieu roi , ok
-     *
-     */
+{ 
     public function __construct() {
         view()->share('new_post', $this->getLatestPost(4));
     }
@@ -20,24 +15,26 @@ class HomeController extends Controller
     public function index()
     {
         return view('home.index', [
-            'posts' => Post::with('user')->paginate(10),
+            'posts' => Post::with('user')->latest()->paginate(10),
         ]);
     }
 
-    public function postDetail($_id)
+    public function postDetail( $slug ,$_id)
     {
         return view('home.post', [
-            'post' => Post::FindOrFail($_id),
+            'post' => Post::where('_id', $_id)->firstOrFail()
          ]);
     }
     public function authorDetail($_id)
     {
+        dd(1);
+
          return view('home.author', [
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
     }
-
+ 
     /**
      * Show the application dashboard.
      *
@@ -47,4 +44,5 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::PUBLISHED)->latest()->take($postNum)->get();
     }
+ 
 }

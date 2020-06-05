@@ -41,7 +41,6 @@ class LoginController extends Controller
     public function logout()
     {
         parent::logout(request());
-
         return redirect()->route('login'); // 
     }
 }

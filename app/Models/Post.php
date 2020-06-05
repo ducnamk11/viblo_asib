@@ -19,8 +19,8 @@ class Post extends Model
      */
     const NOT_PUBLISHED = 0;
 
-    protected $fillable = [ 'title', 'content', 'image' ];
-
+    // protected $fillable = [ 'title', 'content', 'image' ];
+ 
     public function comments()
     {
         return $this->hasMany(Comment::class);

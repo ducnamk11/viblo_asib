@@ -9,6 +9,8 @@ class AccountController extends Controller
 {
     public function index()
     {
-         return view('users.account.index' );
+          return view('users.account.index',[
+             'posts'=> user()->posts()->get(),
+         ] );
     }
 }

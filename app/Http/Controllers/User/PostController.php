@@ -7,15 +7,15 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
-
+use Illuminate\Support\Facades\Auth;
+use Str;
 class PostController extends Controller
 {
     public function index()
     {
         return view('users.account.index', [
             'posts' => user()->posts()->paginate(8),
-           // 'user' => user(), // Hàm này có thể gọi trực tiếp trong View k cần thiết thì đừng trả về nữa. ok 
-        ]);
+         ]);
     }
     public function create()
     {
@@ -30,11 +30,18 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = user()->posts()->create($request->all());
 
-        $this->increaseFindKey($post);
-
-        return redirect()->route('index');
+        $post = user()->posts()->create([
+                'user_id'=>Auth::user()->_id, 
+                'title'=>$request->title, 
+                'slug'=>Str::slug($request->title),
+                 'status'=>0,
+               ]);
+         $this->increaseFindKey($post); return redirect()->route('user.account.index');
+        // $request->slug = Str::slug($request->title);   
+        // $post = user()->posts()->create($request->all());
+        //  $this->increaseFindKey($post);
+        // return redirect()->route('user.account.index');
     }
 
     /**
@@ -48,7 +55,6 @@ class PostController extends Controller
     {
         $lastPost = $this->lastestPost();
         $post->find_key = $lastPost ? $lastPost->find_key + 1 : 0;
-
         return tap($post, function ($post) {
             $post->save();
         });
@@ -56,6 +62,6 @@ class PostController extends Controller
 
     private function lastestPost()
     {
-        return Post::lastest()->first();
+        return Post::whereNotNull('find_key')->latest()->skip(1)->first();
     }
 }
