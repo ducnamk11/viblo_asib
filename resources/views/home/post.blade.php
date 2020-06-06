@@ -14,19 +14,20 @@
     </div>
 </div>
 
-<div class="row comment my-5">
-    @if(user())
+<form method="post" class="row comment my-5">
+    @csrf @if(user())
     <h4>Write comment</h4>
     <div class="col-lg-10 col-10">
         <textarea
             type="text"
             class="form-control"
-            placeholder="write comments ..."
+            placeholder="Write comments ..."
             rows="5"
+            name="content"
         ></textarea>
     </div>
     @else
-    <h4><a href="">Login to comment</a></h4>
+    <h4><a href="{{ route('login') }}">Login to comment</a></h4>
     <div class="col-lg-10 col-10">
         <textarea
             type="text"
@@ -34,15 +35,32 @@
             class="form-control"
             placeholder="write comments ..."
             rows="5"
+            name="content"
         >
         </textarea>
     </div>
     @endif
 
     <div class="col-lg-2 col-2 send-icon">
-        <a href="http://nicesnippets.com/" target="_blank"
-            ><i class="fa fa-paper-plane" aria-hidden="true"></i
-        ></a>
+        <a
+            href=""
+            onclick="this.parentNode.parentNode.submit();"
+            target="_blank"
+        >
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </a>
     </div>
-</div>
-@stop
+</form>
+<hr />
+@foreach( $comments as $comment)
+<p class="blog-post-meta">
+    <strong
+        ><a href="{{route('author.index',['_id'=>$post->user->_id])}}">
+            {{ $comment->user->name}}
+        </a>
+    </strong>
+    : {{ $comment->created_at}}
+</p>
+<p>{{ $comment->content }}</p>
+<hr />
+@endforeach @stop

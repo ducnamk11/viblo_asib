@@ -11,8 +11,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = ['content'];
-
+    protected $guarded = [];
     public function post()
     {
         return $this->belongsTo(Post::class);

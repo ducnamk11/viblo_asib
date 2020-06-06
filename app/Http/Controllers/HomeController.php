@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 { 
@@ -21,8 +23,11 @@ class HomeController extends Controller
 
     public function postDetail( $slug ,$_id)
     {
+        $post = Post::where('_id', $_id)->firstOrFail();
+        $comments = $post->comments;
         return view('home.post', [
-            'post' => Post::where('_id', $_id)->firstOrFail()
+            'post' => $post,
+            'comments' =>  $comments
          ]);
     }
     public function authorDetail($_id)
@@ -32,6 +37,15 @@ class HomeController extends Controller
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
+    }
+    public function postComment(Request $request, $slug, $_id)
+    {
+        user()->comments()->create([
+        'user_id'=>Auth::user()->_id,
+        'post_id'=>$_id,
+        'content'=>$request->content
+       ]);
+       return back();
     }
     public function search(Request $request)
     {
