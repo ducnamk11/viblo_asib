@@ -27,12 +27,22 @@ class HomeController extends Controller
     }
     public function authorDetail($_id)
     {
-        dd(1);
 
          return view('home.author', [
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
+    }
+    public function search(Request $request)
+    {
+
+        $search = str_replace(' ', '%', $request->search);
+        $results =  Post::where('content','LIKE','%'.$search.'%')->get();
+        return view('home.search',[
+            'keyword'=>$request->search,
+            'results'=>$results
+        ]);
+
     }
  
     /**

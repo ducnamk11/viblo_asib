@@ -38,11 +38,7 @@ class PostController extends Controller
                 'slug'=>Str::slug($request->title),
                  'status'=>0,
                ]);
-         $this->increaseFindKey($post); return redirect()->route('user.account.index');
-        // $request->slug = Str::slug($request->title);   
-        // $post = user()->posts()->create($request->all());
-        //  $this->increaseFindKey($post);
-        // return redirect()->route('user.account.index');
+         $this->increaseFindKey($post); return redirect()->route('user.account.index'); 
     }
 
     /**

@@ -18,12 +18,17 @@
                     <a class="nav-link" href="#">Link</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form
+                class="form-inline my-2 my-lg-0"
+                action="{{ asset('/search/') }}"
+                method="get"
+            >
                 <input
                     class="form-control mr-sm-2"
-                    type="search"
+                    type="text"
                     placeholder="Search"
                     aria-label="Search"
+                    name="search"
                 />
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
                     Search
