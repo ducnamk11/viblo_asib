@@ -6,9 +6,9 @@ Route::any('/login/social/{provider}/callback', 'Auth\LoginSocialController@hand
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::prefix('p')->group(function () {
-    Route::get('/{slug}/{_id}', 'HomeController@postDetail')->name('post.detail');
     Route::get('/author/{_id}', 'HomeController@authorDetail')->name('author.index');
-});
+    Route::get('/{slug}/{_id}', 'HomeController@postDetail')->name('post.detail'); 
+ });
 
 /**
  * @todo phần tên route cũng phải sủa lại trong view, ok, cai nay t lam dc, thế khi nào làm xong thì xóa đi, ok

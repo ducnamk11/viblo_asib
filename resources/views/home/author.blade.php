@@ -1,6 +1,5 @@
 @extends('users.master') @section('main')
-
-{{ $user }}
+ 
 <div class="col-md-6 mx-auto">
     <div class="card-body text-center">
         <img
@@ -10,8 +9,7 @@
         />
         <div class="float-left ml-5">
             <p>
-                <a href="#" class="card-link"
-                    > <h3> {{$user->username}} </h3> </a>
+                <a href="#" class="card-link"> <h3> {{$user->username}} </h3> </a>
             </p>
             <p><a href="#" class="card-link">Report</a></p>
         </div>
@@ -46,7 +44,7 @@
                     </div>
                     <span> {!! substr($post->content,0,170) !!}...</span>
                     <p class=""></p>
-                    <a href="{{route('post.detail',['_id'=>$post->_id])}}"></a>
+                    <a href="{{route('post.detail',['_id'=>$post->_id,'slug'=>$post->slug])}}"></a>
                         Continue reading
                     </a>
                 </div>

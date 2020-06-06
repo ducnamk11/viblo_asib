@@ -6,7 +6,7 @@
             <p class="blog-post-meta">
                 {{ $post->created_at}} by
                 <a href="{{route('author.index',['_id'=>$post->user->_id])}}">
-                    {{ $post->user->username}}
+                    {{ $post->user->name}}
                 </a>
             </p>
             <div class="content-post">{!! $post->content !!}</div>

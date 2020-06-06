@@ -30,10 +30,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
+ 
         $post = user()->posts()->create([
                 'user_id'=>Auth::user()->_id, 
                 'title'=>$request->title, 
+                'content'=>$request->content, 
                 'slug'=>Str::slug($request->title),
                  'status'=>0,
                ]);
