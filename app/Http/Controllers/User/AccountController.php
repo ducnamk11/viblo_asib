@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
- use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
     public function index()
     {
-          return view('users.account.index',[
-             'posts'=> user()->posts()->get(),
-         ] );
+        return view('users.account.index', [
+            'posts' => user()->posts()->get(),
+        ]);
     }
 }

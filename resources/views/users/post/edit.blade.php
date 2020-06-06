@@ -1,4 +1,4 @@
 @extends('users.master')
 @section('main')
- edit
+    edit
 @stop

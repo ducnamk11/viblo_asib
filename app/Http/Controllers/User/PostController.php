@@ -9,43 +9,42 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Auth;
 use Str;
+
 class PostController extends Controller
 {
     public function index()
     {
         return view('users.account.index', [
             'posts' => user()->posts()->paginate(8),
-         ]);
+        ]);
     }
+
     public function create()
     {
         return view('users.post.create');
     }
 
     /**
-     * 
+     *
      *
      * @param StorePostRequest $request
      * @return void
      */
     public function store(StorePostRequest $request)
     {
- 
         $post = user()->posts()->create([
-                'user_id'=>Auth::user()->_id, 
-                'title'=>$request->title, 
-                'content'=>$request->content, 
-                'slug'=>Str::slug($request->title),
-                 'status'=>0,
-               ]);
-         $this->increaseFindKey($post); 
-         return redirect()->route('user.account.index'); 
+            'user_id' => Auth::user()->_id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'slug' => Str::slug($request->title),
+            'status' => 0,
+        ]);
+        $this->increaseFindKey($post);
+        return redirect()->route('user.account.index');
     }
-
     /**
      * Tự động tăng dần số trong field find_key
      * Mục đích: Rút gọn Url
-     * 
      * @param \App\Models\Post $post
      * @return \App\Models\Post
      */

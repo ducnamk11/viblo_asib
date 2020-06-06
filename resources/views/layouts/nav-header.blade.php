@@ -7,7 +7,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('index') }}"
-                        >Home <span class="sr-only">(current)</span></a
+                    >Home <span class="sr-only">(current)</span></a
                     >
                 </li>
 
@@ -39,43 +39,43 @@
     </div>
     <ul class="navbar-nav mr-auto float-right">
         @if(Auth::user())
-        <li class="nav-item">
-            <div class="dropdown">
-                <button
-                    class="btn btn-outline-dark dropdown-toggle"
-                    type="button"
-                    id="dropdownMenu2"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    {{user()->name}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button class="dropdown-item" type="button">
-                        <a href="{{ route('user.account.index') }}">Account</a>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <button
+                        class="btn btn-outline-dark dropdown-toggle"
+                        type="button"
+                        id="dropdownMenu2"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        {{user()->name}}
                     </button>
-                    <button class="dropdown-item" type="button">
-                        <a href="{{ route('user.post.create') }}"
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">
+                            <a href="{{ route('user.account.index') }}">Account</a>
+                        </button>
+                        <button class="dropdown-item" type="button">
+                            <a href="{{ route('user.post.create') }}"
                             >Create Post</a
-                        >
-                    </button>
-                    <button class="dropdown-item" type="button">
-                        <a href="{{ route('user.post.create') }}">Some thing</a>
-                    </button>
+                            >
+                        </button>
+                        <button class="dropdown-item" type="button">
+                            <a href="{{ route('user.post.create') }}">Some thing</a>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-        </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+            </li>
         @else
-        <li class="nav-item">
-            <a class="nav-link" href="#">Regiter</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Login</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Regiter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">Login</a>
+            </li>
         @endif
     </ul>
 </nav>

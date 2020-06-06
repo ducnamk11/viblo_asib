@@ -9,8 +9,10 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
-{ 
-    public function __construct() {
+{
+    public
+    function __construct()
+    {
         view()->share('new_post', $this->getLatestPost(4));
     }
 
@@ -21,44 +23,44 @@ class HomeController extends Controller
         ]);
     }
 
-    public function postDetail( $slug ,$_id)
+    public function postDetail($_id)
     {
-        $post = Post::where('_id', $_id)->firstOrFail();
+        $post = Post::FindOrFail($_id);
         $comments = $post->comments;
         return view('home.post', [
             'post' => $post,
-            'comments' =>  $comments
-         ]);
+            'comments' => $comments
+        ]);
     }
+
     public function authorDetail($_id)
     {
-
-         return view('home.author', [
+        return view('home.author', [
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
     }
+
     public function postComment(Request $request, $slug, $_id)
     {
         user()->comments()->create([
-        'user_id'=>Auth::user()->_id,
-        'post_id'=>$_id,
-        'content'=>$request->content
-       ]);
-       return back();
+            'user_id' => Auth::user()->_id,
+            'post_id' => $_id,
+            'content' => $request->content
+        ]);
+        return back();
     }
+
     public function search(Request $request)
     {
-
         $search = str_replace(' ', '%', $request->search);
-        $results =  Post::where('content','LIKE','%'.$search.'%')->get();
-        return view('home.search',[
-            'keyword'=>$request->search,
-            'results'=>$results
+        $results = Post::where('content', 'LIKE', '%' . $search . '%')->get();
+        return view('home.search', [
+            'keyword' => $request->search,
+            'results' => $results
         ]);
-
     }
- 
+
     /**
      * Show the application dashboard.
      *
@@ -68,5 +70,4 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::PUBLISHED)->latest()->take($postNum)->get();
     }
- 
 }
