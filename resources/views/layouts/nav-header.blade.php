@@ -24,6 +24,7 @@
                 method="get"
             >
                 <input
+                    required
                     class="form-control mr-sm-2"
                     type="text"
                     placeholder="Search"
