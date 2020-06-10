@@ -51,6 +51,10 @@
         </a>
     </div>
 </form>
+<div class="clear"></div>
+@error('content')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
 <hr />
 @foreach( $comments as $comment)
 <p class="blog-post-meta">
