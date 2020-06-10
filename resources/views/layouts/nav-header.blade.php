@@ -57,11 +57,10 @@
                         </button>
                         <button class="dropdown-item" type="button">
                             <a href="{{ route('user.post.create') }}"
-                            >Create Post</a
-                            >
+                            > Create Post </a>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <a href="{{ route('user.post.create') }}">Some thing</a>
+                            <a href="{{ route('user.account.edit')}}">edit</a>
                         </button>
                     </div>
                 </div>
@@ -71,7 +70,7 @@
             </li>
         @else
             <li class="nav-item">
-                <a class="nav-link" href="#">Regiter</a>
+                <a class="nav-link" href="{{ route('register') }}">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">Login</a>
