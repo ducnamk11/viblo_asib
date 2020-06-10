@@ -2,9 +2,8 @@
 @foreach($posts as $post)
 <div class="card flex-md-row box-shadow h-md-250">
     <img
-        src="https://www.w3schools.com/cssref/pineapple.jpg"
-        class="rounded-circle card-img-right flex-auto d-none d-md-block"
-        style="width: 90px; height: 90px;"
+        src="{{ asset('avatars/'.$post->user->avatar) }}"
+        class="rounded-circle float-left avatar img-thumbnail card-img-right flex-auto d-none d-md-block"
     />
     <div class="card-body d-flex flex-column align-items-start">
         <strong class="d-inline-block mb-2 text-primary"> </strong>
@@ -14,10 +13,10 @@
         <div class="mb-1 text-muted">
             {{date('d-m-Y', strtotime($post->created_at))}}
         </div>
-        <p class="card-text mb-auto">{{substr($post->content,0,170)}} ...</p>
-        <a
-            href="{{route('post.detail',['slug'=>$post->slug,'_id'=>$post->_id])}}"
-        >
+        <p class="card-text mb-auto">
+            {!! substr($post->content,0,170) !!} ...
+        </p>
+        <a href="{{route('post.detail',['slug' => $post->generatorSlug()])}}">
             Continue reading
         </a>
     </div>

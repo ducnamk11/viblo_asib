@@ -1,11 +1,11 @@
 <div class="col-md-4">
     <div class="right-menu">
         <h3>New post</h3>
-        @foreach($new_post as $post)
+         @foreach($new_post as $post)
         <div class="card">
             <span class="card-text"></span>
-                <a
-                    href="{{route('post.detail',['slug'=>$post->slug,'_id'=>$post->_id])}}">
+                 <a
+                    href="{{route('post.detail',['slug' => $post->generatorSlug()])}}">
                     {{$post->title}}
                 </a> </span>
             <p class="smaill text-muted font-italic">   

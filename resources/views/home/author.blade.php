@@ -1,15 +1,17 @@
 @extends('users.master') @section('main')
- 
+
 <div class="col-md-6 mx-auto">
     <div class="card-body text-center">
         <img
-            src="https://www.w3schools.com/cssref/pineapple.jpg"
+            src="{{ asset('avatars/'.$user->avatar) }}"
             style="height: 80px; width: 80px;"
             class="rounded-circle float-left"
         />
         <div class="float-left ml-5">
             <p>
-                <a href="#" class="card-link"> <h3> {{$user->username}} </h3> </a>
+                <a href="#" class="card-link">
+                    <h3>{{$user->name}}</h3>
+                </a>
             </p>
             <p><a href="#" class="card-link">Report</a></p>
         </div>
@@ -28,7 +30,7 @@
 <div class="container" style="margin-top: 30px;">
     <div class="row">
         <div class="col-md-8">
-            <h3>{{$user->username}} of POST</h3>
+            <h3>{{$user->name}} of POST</h3>
             @foreach($posts as $post )
             <div class="card flex-md-row box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
@@ -44,7 +46,9 @@
                     </div>
                     <span> {!! substr($post->content,0,170) !!}...</span>
                     <p class=""></p>
-                    <a href="{{route('post.detail',['_id'=>$post->_id,'slug'=>$post->slug])}}"></a>
+                    <a
+                        href="{{route('post.detail',['slug' => $post->generatorSlug()])}}"
+                    >
                         Continue reading
                     </a>
                 </div>
