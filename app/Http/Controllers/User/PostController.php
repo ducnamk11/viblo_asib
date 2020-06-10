@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Auth;
-use Str;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Controllers\PostManager;
 
 class PostController extends Controller
 {
@@ -25,40 +25,16 @@ class PostController extends Controller
     }
 
     /**
-     *
-     *
      * @param StorePostRequest $request
      * @return void
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request, PostManager $post)
     {
-        $post = user()->posts()->create([
-            'user_id' => Auth::user()->_id,
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => Str::slug($request->title),
-            'status' => 0,
-        ]);
-        $this->increaseFindKey($post);
-        return redirect()->route('user.account.index');
-    }
-    /**
-     * Tự động tăng dần số trong field find_key
-     * Mục đích: Rút gọn Url
-     * @param \App\Models\Post $post
-     * @return \App\Models\Post
-     */
-    private function increaseFindKey(Post $post)
-    {
-        $lastPost = $this->lastestPost();
-        $post->find_key = $lastPost ? $lastPost->find_key + 1 : 0;
-        return tap($post, function ($post) {
-            $post->save();
-        });
-    }
+        $post->create(array_merge($request->all(), [
+            'status' => Post::NOT_PUBLISHED,
+            'slug'   => Str::slug($request->title)
+        ]), user());
 
-    private function lastestPost()
-    {
-        return Post::whereNotNull('find_key')->latest()->skip(1)->first();
+        return redirect()->route('user.account.index');
     }
 }

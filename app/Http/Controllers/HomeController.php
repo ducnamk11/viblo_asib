@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentPost;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,13 +24,14 @@ class HomeController extends Controller
         ]);
     }
 
-    public function postDetail($_id)
+    public function postDetail($slug, PostManager $post)
     {
-        $post = Post::FindOrFail($_id);
-        $comments = $post->comments;
-        return view('home.post', [
+        if (! ($post = $post->findBySlug($slug))) {
+            return abort(404);
+        }
+         return view('home.post', [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $post->comments,
         ]);
     }
 
@@ -41,11 +43,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function postComment(Request $request, $slug, $_id)
+    public function postComment(StoreCommentPost $request, $slug)
     {
-        user()->comments()->create([
+        $find_key = PostManager::getFindKeyFromSlug($slug);
+        $postCurrent = Post::where('find_key',$find_key)->first();
+         user()->comments()->create([
             'user_id' => Auth::user()->_id,
-            'post_id' => $_id,
+            'post_id' => $postCurrent->_id,
             'content' => $request->content
         ]);
         return back();
@@ -68,6 +72,7 @@ class HomeController extends Controller
      */
     private function getLatestPost(int $postNum = 4)
     {
-        return Post::with('user')->where('status', Post::PUBLISHED)->latest()->take($postNum)->get();
+        return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
+ 
 }

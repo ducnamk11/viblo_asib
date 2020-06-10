@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Post extends Model
 {
@@ -13,7 +14,6 @@ class Post extends Model
      * status post has published
      */
     const PUBLISHED = 1;
-
     /**
      * status post not publish yet
      */
@@ -36,4 +36,18 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Create slug from title & find_key
+     *
+     * @return string
+     */
+    public function generatorSlug()
+    {
+        return Str::slug($this->title) . '-' . base62_int_encode($this->find_key);
+    }
+
+    public function stripTagsContent()
+    {
+        return preg_replace('/<[^>]*>/', '', $this->content);
+    }
 }
