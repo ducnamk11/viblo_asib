@@ -9,7 +9,7 @@
 
 <div class="card flex-md-row box-shadow h-md-250">
     <img
-        src="https://www.w3schools.com/cssref/pineapple.jpg"
+        src="{{ asset('avatars/'.$post->user->avatar) }}"
         class="rounded-circle card-img-right flex-auto d-none d-md-block"
         style="width: 90px; height: 90px;"
     />

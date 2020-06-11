@@ -10,7 +10,7 @@ Route::any('/search', 'HomeController@search')->name('search');
 Route::prefix('p')->group(function () {
     Route::get('/author/{_id}', 'HomeController@authorDetail')->name('author.index');
     Route::get('/{slug}', 'HomeController@postDetail')->name('post.detail');
-    Route::post('/{slug}', 'HomeController@postComment')->name('post.detail');
+    Route::post('/{slug}', 'HomeController@postComment')->name('post.comment');
 });
 Route::group(['prefix' => 'me', 'namespace' => 'User', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'post'], function () { 

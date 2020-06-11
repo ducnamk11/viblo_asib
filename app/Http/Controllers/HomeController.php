@@ -26,12 +26,12 @@ class HomeController extends Controller
 
     public function postDetail($slug, PostManager $post)
     {
-        if (! ($post = $post->findBySlug($slug))) {
+        if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         }
-         return view('home.post', [
+        return view('home.post', [
             'post' => $post,
-            'comments' => $post->comments,
+            'comments' => $post->comments()->whereNull('parent_id')->get(),
         ]);
     }
 
@@ -46,11 +46,12 @@ class HomeController extends Controller
     public function postComment(StoreCommentPost $request, $slug)
     {
         $find_key = PostManager::getFindKeyFromSlug($slug);
-        $postCurrent = Post::where('find_key',$find_key)->first();
-         user()->comments()->create([
+        $postCurrent = Post::where('find_key', $find_key)->first();
+        user()->comments()->create([
             'user_id' => Auth::user()->_id,
             'post_id' => $postCurrent->_id,
-            'content' => $request->content
+            'parent_id' => $request->parent_id,
+            'content' => $request->content,
         ]);
         return back();
     }
@@ -74,5 +75,5 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
- 
+
 }

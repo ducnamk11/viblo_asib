@@ -48,6 +48,9 @@ end master page
     height: 180px;
     width: 180px;
 }
+.reply-input {
+    display: none;
+}
 
 body {
     font-family: "Open Sans", sans-serif;
