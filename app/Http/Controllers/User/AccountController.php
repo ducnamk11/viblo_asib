@@ -23,7 +23,7 @@ class AccountController extends Controller
 
     public function Edit(Request $request)
     {
-        $avatar = 'https://lh3.googleusercontent.com/proxy/faKA8U54re28_oATcXuzDAlI0KVEIXm0YTfLUIGNch5rWjR21Y2DXfQh7P_DNp4Uu3yzSqCaXM50GGEyse5Q24p5hadqyLBiC7Vl4crtZXGsl7xeebeZDw';
+        $avatar = '';
           if($request->hasFile('avatar')){
             $avatar = time().'.'.$request->file('avatar')->getClientOriginalExtension();
              $request->file('avatar')->move('avatars',$avatar);
@@ -37,5 +37,6 @@ class AccountController extends Controller
         ]);
         return redirect()->route('user.account.index');
     }
+
  
 }

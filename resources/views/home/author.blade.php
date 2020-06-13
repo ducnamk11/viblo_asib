@@ -1,5 +1,4 @@
 @extends('users.master') @section('main')
-
 <div class="col-md-6 mx-auto">
     <div class="card-body text-center">
         <img
