@@ -27,7 +27,6 @@ class PostManager extends Controller
         }else{
             $post->find_key =0;
         }
-
         return tap($post, function ($post) use ($user) {
             $user->posts()->save($post);
         });
@@ -46,9 +45,9 @@ class PostManager extends Controller
         return base62_int_decode(array_pop($slug));
     }
 
-    public function findBySlug(string $slug)
+    public static function findBySlug(string $slug)
     {
-        return $this->post->where('find_key', self::getFindKeyFromSlug($slug))->first();
+        return Post::where('find_key', self::getFindKeyFromSlug($slug))->first();
     }
 
     /**
