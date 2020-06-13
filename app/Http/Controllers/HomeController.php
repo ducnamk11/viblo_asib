@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentPost;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\PostView;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-
+  
 class HomeController extends Controller
 {
     public
@@ -19,19 +20,19 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home.index', [
+         return view('home.index', [
             'posts' => Post::with('user')->latest()->paginate(10),
         ]);
     }
 
-    public function postDetail($slug, PostManager $post)
+    public function postDetail($slug, PostManager $post )
     {
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
-        }
+        };
         return view('home.post', [
             'post' => $post,
-            'comments' => $post->comments()->whereNull('parent_id')->get(),
+            'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
         ]);
     }
 
@@ -41,7 +42,7 @@ class HomeController extends Controller
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
-    }
+     }
 
     public function postComment(StoreCommentPost $request, $slug)
     {
@@ -75,5 +76,6 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
+    
 
 }

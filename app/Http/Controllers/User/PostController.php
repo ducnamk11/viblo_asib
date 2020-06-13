@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\StoreCommentPost;
 use App\Http\Controllers\PostManager;
 
 class PostController extends Controller
@@ -32,9 +33,10 @@ class PostController extends Controller
     {
         $post->create(array_merge($request->all(), [
             'status' => Post::NOT_PUBLISHED,
-            'slug'   => Str::slug($request->title)
+            'slug'   => Str::slug($request->title),
         ]), user());
 
         return redirect()->route('user.account.index');
     }
+ 
 }

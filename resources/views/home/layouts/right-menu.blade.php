@@ -11,8 +11,8 @@
             <p class="smaill text-muted font-italic">   
                  {{$post->user->name}}
                 <i class="fa fa-thumbs-up mx-sm-1">11</i>
-                <i class="fa fa-thumbs-down mx-sm-1">11</i>
-                <i class="fa fa-comments mx-sm-1">22</i>
+                <i class="fa fa-eye mx-sm-1">{{ $post->view_count }}</i>
+                <i class="fa fa-comments mx-sm-1">{{ count($post->comments) }}</i>
             </p>
         </div>
         <hr />
