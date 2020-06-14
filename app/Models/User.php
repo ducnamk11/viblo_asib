@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class);
     }
+    
+    public function postViews()
+    {
+        return $this->hasMany(PostView::class);
+    }
 }
