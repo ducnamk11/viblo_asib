@@ -14,7 +14,7 @@ class PostView extends Migration
     public function up()
     {
         Schema::table('post_views', function (Blueprint $table) {
-            $table->index('user_id');
+            $table->index('user_id')->nullable();
             $table->index('post_id');
             $table->string('ip');
             $table->foreign('user_id')->references('id')->on('users');
