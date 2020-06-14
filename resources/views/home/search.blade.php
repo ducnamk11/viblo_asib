@@ -22,10 +22,8 @@
             {{date('d-m-Y', strtotime($post->created_at))}}
         </div>
         <p class="card-text mb-auto">{{substr($post->content,0,170)}} ...</p>
-        <a
-            href="{{route('post.detail',['slug'=>$post->slug,'_id'=>$post->_id])}}"
-        >
-            Continue reading
+        <a href="{{route('post.detail',['slug' => $post->generatorSlug()])}}">
+            > Continue reading
         </a>
     </div>
 </div>

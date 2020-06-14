@@ -30,6 +30,10 @@ class Post extends Model
     {
         return $this->hasMany(Report::class);
     }
+    public function postviews()
+    {
+        return $this->hasMany(PostView::class);
+    }
 
     public function user()
     {
@@ -49,5 +53,5 @@ class Post extends Model
     public function stripTagsContent()
     {
         return preg_replace('/<[^>]*>/', '', $this->content);
-    }
+    }  
 }

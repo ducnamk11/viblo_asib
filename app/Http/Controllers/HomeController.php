@@ -9,7 +9,7 @@ use App\Models\PostView;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-  
+
 class HomeController extends Controller
 {
     public
@@ -20,21 +20,38 @@ class HomeController extends Controller
 
     public function index()
     {
-         return view('home.index', [
+        return view('home.index', [
             'posts' => Post::with('user')->latest()->paginate(10),
         ]);
     }
 
-    public function postDetail($slug, PostManager $post )
+    public function postDetail($slug, PostManager $post, PostView $postView)
     {
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         };
+ 
+    //      save count to db
+        $ip = \request()->ip();
+        $isViewed = $postView->where([['post_id',$post->_id],['ip',$ip]])->exists();
+        if ($isViewed==false) {
+            $postView->create([
+                'user_id' => isset(user()->_id) ? user()->_id : null,
+                'post_id' => $post->_id,
+                'ip'      => $ip,
+            ]);
+       } 
+    //    *end  save count to db
         return view('home.post', [
             'post' => $post,
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
         ]);
     }
+ 
+public function FunctionName()
+{
+     
+}
 
     public function authorDetail($_id)
     {
@@ -42,7 +59,7 @@ class HomeController extends Controller
             'user' => User::FindOrFail($_id),
             'posts' => User::FindOrFail($_id)->posts,
         ]);
-     }
+    }
 
     public function postComment(StoreCommentPost $request, $slug)
     {
@@ -76,6 +93,6 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
-    
+
 
 }
