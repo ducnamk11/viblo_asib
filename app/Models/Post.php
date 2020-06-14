@@ -30,7 +30,7 @@ class Post extends Model
     {
         return $this->hasMany(Report::class);
     }
-    public function postviews()
+    public function postViews()
     {
         return $this->hasMany(PostView::class);
     }
