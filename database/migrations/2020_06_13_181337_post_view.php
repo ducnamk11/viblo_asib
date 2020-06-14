@@ -17,6 +17,8 @@ class PostView extends Migration
             $table->index('user_id')->nullable();
             $table->index('post_id');
             $table->string('ip');
+            $table->string('user_agent');
+            $table->index('view_hash'); // sha1( ip|user_agent )
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
