@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\PostView;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Services\Post\GuestViewer;
+use App\Services\Post\UserViewer;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -25,23 +27,28 @@ class HomeController extends Controller
         ]);
     }
 
-    public function postDetail($slug, PostManager $post, PostView $postView)
+    public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer)
     {
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         };
- 
-    //      save count to db
-        $ip = \request()->ip();
-        $isViewed = $postView->where([['post_id',$post->_id],['ip',$ip]])->exists();
-        if ($isViewed==false) {
-            $postView->create([
-                'user_id' => isset(user()->_id) ? user()->_id : null,
-                'post_id' => $post->_id,
-                'ip'      => $ip,
-            ]);
-       } 
-    //    *end  save count to db
+
+        // $ip = \request()->ip();
+        // $isViewed = $postView->where([['post_id',$post->_id],['ip',$ip]])->exists();
+        // if ($isViewed==false) {
+        //     $postView->create([
+        //         'user_id' => isset(user()->_id) ? user()->_id : null,
+        //         'post_id' => $post->_id,
+        //         'ip'      => $ip,
+        //     ]);
+        // }
+
+        if (user()) {
+            $userViewer->logViewer($post);
+        } else {
+            $guestViewer->logViewer($post);
+        }
+
         return view('home.post', [
             'post' => $post,
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
