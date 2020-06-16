@@ -17,7 +17,7 @@ class UserViewer extends Viewer
      */
     protected $user;
 
-    public function __construct(Authenticatable $user) {
+    public function __construct(Authenticatable $user = null) {
         $this->user = $user;
     }
 
@@ -30,6 +30,17 @@ class UserViewer extends Viewer
         } else {
             $this->updateRecord($lastView);
         }
+    }
+
+    /**
+     * Count user viewer
+     *
+     * @param \App\Models\Post $post
+     * @return int
+     */
+    public static function count(Post $post)
+    {
+        return $post->postViews()->whereNull('user_id')->count();
     }
 
     protected function createRecord(Post $post)
@@ -45,12 +56,6 @@ class UserViewer extends Viewer
         );
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param \App\Models\Post $post
-     * @return \App\Models\PostView|null
-     */
     protected function getLastRecord(Post $post)
     {
         return $this->user->postViews()->where('post_id', $post->id)->first();

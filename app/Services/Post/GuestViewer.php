@@ -18,6 +18,17 @@ class GuestViewer extends Viewer
         }
     }
 
+    /**
+     * Count guest viewer
+     *
+     * @param Post $post
+     * @return int
+     */
+    public static function count(Post $post)
+    {
+        return $post->postViews()->whereNotNull('user_id')->count();
+    }
+
     protected function getLastRecord(Post $post)
     {
         return $post->postViews()->where('view_hash', $this->hashView())->first();
