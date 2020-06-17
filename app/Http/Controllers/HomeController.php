@@ -22,6 +22,7 @@ class HomeController extends Controller
 
     public function index()
     {
+       
         return view('home.index', [
             'posts' => Post::with('user')->latest()->paginate(10),
         ]);
@@ -32,14 +33,15 @@ class HomeController extends Controller
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         }; 
-
         if (user()) {
             $userViewer->logViewer($post);
         } else {
             $guestViewer->logViewer($post);
         }
          return view('home.post', [
+            'slug'=>$slug,
             'post' => $post,
+            // 'countVote'=>count($post->votes()->get()),
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
             'countView'=> count($post->postViews()->get())
         ]);

@@ -11,6 +11,8 @@ Route::prefix('p')->group(function () {
     Route::get('/author/{_id}', 'HomeController@authorDetail')->name('author.index');
     Route::get('/{slug}', 'HomeController@postDetail')->name('post.detail');
     Route::post('/{slug}', 'CommentController@postComment')->name('post.comment');
+    Route::get('/vote/{slug}', 'VoteController@store')->name('user.vote.store');
+
 });
 Route::group(['prefix' => 'me', 'namespace' => 'User', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'post'], function () { 

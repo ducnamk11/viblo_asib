@@ -51,7 +51,15 @@ end master page
 .reply-input {
     display: none;
 }
-
+.vote {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: gray;
+}
+.vote:hover {
+    color: black;
+}
 body {
     font-family: "Open Sans", sans-serif;
     font-size: 14px;

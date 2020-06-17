@@ -4,7 +4,17 @@
 
 (function () {
     "use strict"; // use strict to start
-
+    $("i#vote").click(function () {
+        var slug = $(this).attr("slug");
+        $.ajax({
+            url: "/p/vote/" + slug,
+            method: "GET",
+            data: { slug: slug },
+            success: function () {
+                window.location.reload();
+            },
+        });
+    });
     $(document).ready(function () {
         $(".reply-comment").click(function () {
             $(this).next().toggle();

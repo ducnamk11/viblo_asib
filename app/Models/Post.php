@@ -34,6 +34,10 @@ class Post extends Model
     {
         return $this->hasMany(PostView::class);
     }
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 
     public function user()
     {

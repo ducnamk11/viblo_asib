@@ -11,6 +11,17 @@
             </p>
             <div class="content-post">{!! $post->content !!}</div>
         </div>
+        <hr />
+        <div>
+            <i slug="{{ $slug }}" id="vote" class="vote fa fa-thumbs-up mr-3">
+                {{ count($post->votes) }}
+            </i>
+            <i class="vote fa fa-eye mx-sm-1">{{ count($post->postViews) }}</i>
+            <i
+                class="vote fa fa-comments mx-sm-1"
+                >{{ count($post->comments) }}</i
+            >
+        </div>
     </div>
 </div>
 @include('home.layouts.comment') @stop
