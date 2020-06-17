@@ -27,38 +27,25 @@ class HomeController extends Controller
         ]);
     }
 
-    public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer)
+    public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer, PostView $postView)
     {
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
-        };
-
-        // $ip = \request()->ip();
-        // $isViewed = $postView->where([['post_id',$post->_id],['ip',$ip]])->exists();
-        // if ($isViewed==false) {
-        //     $postView->create([
-        //         'user_id' => isset(user()->_id) ? user()->_id : null,
-        //         'post_id' => $post->_id,
-        //         'ip'      => $ip,
-        //     ]);
-        // }
+        }; 
 
         if (user()) {
             $userViewer->logViewer($post);
         } else {
             $guestViewer->logViewer($post);
         }
-
-        return view('home.post', [
+         return view('home.post', [
             'post' => $post,
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
+            'countView'=> count($post->postViews()->get())
         ]);
     }
  
-public function FunctionName()
-{
-     
-}
+
 
     public function authorDetail($_id)
     {
