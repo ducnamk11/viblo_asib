@@ -41,9 +41,10 @@ class HomeController extends Controller
          return view('home.post', [
             'slug'=>$slug,
             'post' => $post,
-            // 'countVote'=>count($post->votes()->get()),
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
-            'countView'=> count($post->postViews()->get())
+            'countView'=> count($post->postViews()->get()),
+            'voteUp'=>$post->votes->sum('up'),
+            'voteDown'=>$post->votes->sum('down'),
         ]);
     }
  
@@ -89,6 +90,9 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
-
+private  function getMostViewd(int $postNum = 4)
+{
+    // return Post::
+}
 
 }

@@ -13,14 +13,25 @@
         </div>
         <hr />
         <div>
-            <i slug="{{ $slug }}" id="vote" class="vote fa fa-thumbs-up mr-3">
-                {{ count($post->votes) }}
-            </i>
-            <i class="vote fa fa-eye mx-sm-1">{{ count($post->postViews) }}</i>
             <i
-                class="vote fa fa-comments mx-sm-1"
-                >{{ count($post->comments) }}</i
+                voteId="{{ $post->_id }}"
+                id="voteUp"
+                class="vote fa fa-thumbs-up mr-3"
             >
+                {{ $post->votes->sum('up') }}
+            </i>
+            <i
+                voteId="{{ $post->_id }}"
+                id="voteDown"
+                class="vote fa fa-thumbs-down mr-3"
+            >
+                {{ $post->votes->sum('down') }}
+            </i>
+
+            <i class="vote fa fa-eye mx-sm-1"> {{ count($post->postViews) }}</i>
+            <i class="vote fa fa-comments mx-sm-1">
+                {{ count($post->comments) }}
+            </i>
         </div>
     </div>
 </div>

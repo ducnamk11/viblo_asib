@@ -4,17 +4,29 @@
 
 (function () {
     "use strict"; // use strict to start
-    $("i#vote").click(function () {
-        var slug = $(this).attr("slug");
+    $("i#voteUp").click(function () {
+        var id = $(this).attr("voteId");
         $.ajax({
-            url: "/p/vote/" + slug,
+            url: "/p/vote/" + id + "/up",
             method: "GET",
-            data: { slug: slug },
+            data: { id: id },
             success: function () {
                 window.location.reload();
             },
         });
     });
+    $("i#voteDown").click(function () {
+        var id = $(this).attr("voteId");
+        $.ajax({
+            url: "/p/vote/" + id + "/down",
+            method: "GET",
+            data: { id: id },
+            success: function () {
+                window.location.reload();
+            },
+        });
+    });
+
     $(document).ready(function () {
         $(".reply-comment").click(function () {
             $(this).next().toggle();
