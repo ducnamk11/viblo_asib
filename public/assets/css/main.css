@@ -20,6 +20,9 @@ type
 /**
 master page
  */
+.container {
+    min-height: 700px;
+}
 .card {
     border: none;
 }

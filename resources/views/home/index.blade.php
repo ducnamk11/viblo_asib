@@ -1,12 +1,12 @@
-@extends('home.master') @section('title','home') @section('main')
-@foreach($posts as $post)
+@extends('home.master')
+<!-- @section('title','home')  -->
+@section('main') @foreach($posts as $post)
 <div class="card flex-md-row box-shadow h-md-250">
     <img
         src="{{ asset('avatars/'.$post->user->avatar) }}"
         class="rounded-circle float-left avatar img-thumbnail card-img-right flex-auto d-none d-md-block"
     />
     <div class="card-body d-flex flex-column align-items-start">
-        <strong class="d-inline-block mb-2 text-primary"> </strong>
         <h3 class="mb-0">
             <a class="text-dark" href="#"> {{$post->title}} </a>
         </h3>
