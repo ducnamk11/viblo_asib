@@ -11,14 +11,15 @@ use App\Models\Post;
 use App\Services\Post\GuestViewer;
 use App\Services\Post\UserViewer;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Vote;
 
 class HomeController extends Controller
 {
     public
     function __construct()
     {
-        view()->share('new_post', $this->getLatestPost(4));
-    }
+        view()->share([['new_post', $this->getLatestPost(4)],['most_viewed', $this->getMostViewd(4)]]);
+     }
 
     public function index()
     {
@@ -88,9 +89,10 @@ class HomeController extends Controller
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
     }
-private  function getMostViewd(int $postNum = 4)
+private  function getMostViewd(int $postNum = 4 )
 {
-    // return Post::
+     
+    return Vote::with('post')->orderBy('vote', 'desc')->take($postNum)->get();
 }
 
 }

@@ -19,7 +19,7 @@
         @endforeach
     <!-- most_viewed -->
         <h3>Most viewed</h3>
-        @foreach($new_post as $post)
+        @foreach($most_viewed as $post)
             <div class="card">
                 <span class="card-text"></span>
                 <a
