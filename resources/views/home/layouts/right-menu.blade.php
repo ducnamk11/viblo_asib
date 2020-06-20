@@ -10,7 +10,7 @@
                 </a> </span>
                 <p class="smaill text-muted font-italic">
                     {{$post->user->name}}
-                    <i class="fa fa-thumbs-up mx-sm-1">   {{ $post->votes->sum('up') }}</i>
+                    <i class="fa fa-thumbs-up mx-sm-1">   {{ $post->votes()->sum('vote') }}</i>
                     <i class="fa fa-eye mx-sm-1">{{ count($post->postViews) }}</i>
                     <i class="fa fa-comments mx-sm-1">{{ count($post->comments) }}</i>
                 </p>
@@ -28,7 +28,7 @@
                 </a> </span>
                 <p class="smaill text-muted font-italic">
                     {{$post->user->name}}
-                    <i class="fa fa-thumbs-up mx-sm-1">   {{ $post->votes->sum('up') }}</i>
+                    <i class="fa fa-thumbs-up mx-sm-1">   {{ $post->votes()->sum('vote') }}</i>
                     <i class="fa fa-eye mx-sm-1">{{ count($post->postViews) }}</i>
                     <i class="fa fa-comments mx-sm-1">{{ count($post->comments) }}</i>
                 </p>

@@ -17,8 +17,7 @@ class CreateVotesTable extends Migration
             //$collection->bigIncrements('id');
             $collection->index('user_id');
             $collection->index('post_id');
-            $collection->integer('up')->default(0);
-            $collection->integer('down')->default(0);
+             $collection->integer('vote')->default(0);
             $collection->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $collection->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });

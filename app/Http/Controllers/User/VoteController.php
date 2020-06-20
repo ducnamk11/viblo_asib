@@ -14,10 +14,9 @@ class VoteController extends Controller
     {
 
         $postCurrent = $post->findOrFail($id);
-        $vote->where('post_id', $postCurrent->_id)->delete();
+        $vote->where([['post_id', $postCurrent->_id],['user_id', user()->_id]])->delete();
         $vote->updateOrCreate([
-            'up' => 1,
-            'down' => 0,
+            'vote' => 1,
             'user_id' => user()->_id,
             'post_id' => $postCurrent->_id,
         ]);
@@ -27,10 +26,9 @@ class VoteController extends Controller
     public function down($id, Vote $vote, Post $post)
     {
         $postCurrent = $post->findOrFail($id);
-        $vote->where('post_id', $postCurrent->_id)->delete();
+        $vote->where([['post_id', $postCurrent->_id],['user_id', user()->_id]])->delete();
         $vote->updateOrCreate([
-            'down' => 1,
-            'up' => 0,
+            'vote' => -1,
             'user_id' => user()->_id,
             'post_id' => $postCurrent->_id,
         ]);
