@@ -4,6 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Models\PostView;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 
 abstract class Viewer
@@ -22,6 +23,17 @@ abstract class Viewer
     public static function count(Post $post)
     {
         return $post->postViews()->count();
+    }
+
+    public static function orderPostByViewer(Collection $posts)
+    {
+        if (isset($posts[0]) && ! ($posts[0] instanceof Post)) {
+            throw new \Exception("Invalid collection", 1);
+        }
+
+        return $posts->sort(function (Post $a, Post $b) {
+            return $a->postViews()->count() <=> $b->postViews()->count();
+        });
     }
 
     /**

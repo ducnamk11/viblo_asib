@@ -15,8 +15,7 @@ use App\Models\Vote;
 
 class HomeController extends Controller
 {
-    public
-    function __construct()
+    public function __construct()
     {
         view()->share([['new_post', $this->getLatestPost(4)],['most_viewed', $this->getMostViewd(4)]]);
      }
@@ -34,11 +33,13 @@ class HomeController extends Controller
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         };
+
         if (user()) {
             $userViewer->logViewer($post);
         } else {
             $guestViewer->logViewer($post);
         }
+
          return view('home.post', [
             'slug'=>$slug,
             'post' => $post,
