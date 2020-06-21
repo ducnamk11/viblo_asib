@@ -26,13 +26,9 @@ abstract class Viewer
     }
 
     public static function orderPostByViewer(Collection $posts)
-    {
-        if (isset($posts[0]) && ! ($posts[0] instanceof Post)) {
-            throw new \Exception("Invalid collection", 1);
-        }
-
+    { 
         return $posts->sort(function (Post $a, Post $b) {
-            return $a->postViews()->count() <=> $b->postViews()->count();
+            return $b->postViews()->count() <=> $a->postViews()->count();
         });
     }
 
