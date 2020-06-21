@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Vote;
 use Illuminate\Http\Request;
-use App\Http\Controllers\PostManager;
+use App\Services\Post\PostManager;
 use App\Models\Post;
 
 class VoteController extends Controller

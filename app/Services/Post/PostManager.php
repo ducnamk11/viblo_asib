@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services\Post;
 
 use App\Models\Post;
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Http\Controllers\Controller;
 
 class PostManager extends Controller
 {

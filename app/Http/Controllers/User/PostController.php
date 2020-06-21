@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\StoreCommentPost;
-use App\Http\Controllers\PostManager;
+use App\Services\Post\PostManager;
 
 class PostController extends Controller
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentPost;
-use App\Http\Controllers\PostManager;
+use App\Services\Post\PostManager;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 

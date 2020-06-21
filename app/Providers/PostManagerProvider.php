@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Http\Controllers\PostManager;
+use App\Services\Post\PostManager;
 
 class PostManagerProvider extends ServiceProvider
 {
