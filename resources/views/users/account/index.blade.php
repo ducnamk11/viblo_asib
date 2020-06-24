@@ -1,37 +1,14 @@
 @extends('users.master') @section('main')
-<div class="col-md-6 mx-auto">
-    <div class="card-body text-center">
-        <img
-            src="{{ url('avatars/'.user()->avatar) }}"
-            class="rounded-circle float-left avatar img-thumbnail"
-        />
-        <div class="float-left ml-5">
-            <p>
-                <a href="#" class="card-link">
-                    <h3>{{user()->name}}</h3>
-                </a>
-            </p>
-            <p>
-                <a href="{{ route('user.account.edit') }}" class="card-link"
-                    >Edit your file</a
-                >
-            </p>
-        </div>
-    </div>
-</div>
-<div style="margin-top: 90px;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
-        <ul class="navbar-nav mx-auto col-md-6">
-            <li class="nav-item"><a class="nav-link" href="#">Follow</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Question</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Question</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Post</a></li>
-        </ul>
-    </nav>
-</div>
+@include('users.account.layouts.account-header')
 <div class="container" style="margin-top: 30px;">
     <div class="row">
         <div class="col-md-8">
+            @if(count($posts)==0)
+            <h3>Your Post not valid yet!</h3>
+            @else
+            <button class="btn btn-facebook">
+                <h2>Your post</h2>
+            </button>
             @foreach($posts as $post )
             <div class="card flex-md-row box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
@@ -51,7 +28,10 @@
                         Continue reading
                     </a>
                     <p class="smaill text-muted font-italic">
-                        <i class="fa fa-thumbs-up mx-sm-1">11</i>
+                        <i
+                            class="fa fa-thumbs-up mx-sm-1"
+                            >{{ count($post->votes) }}</i
+                        >
                         <i class="fa fa-eye mx-sm-1">
                             {{ count($post->postViews) }}
                         </i>
@@ -62,29 +42,9 @@
                 </div>
             </div>
             <hr />
-            @endforeach
+            @endforeach @endif
         </div>
-
-        <div class="col-md-4 pl-5 border">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
+        @include('users.account.layouts.account-right-menu')
     </div>
 </div>
 @stop
