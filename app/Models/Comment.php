@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Comment extends Model
 {
@@ -12,6 +14,7 @@ class Comment extends Model
      * @var array
      */
     protected $guarded = [];
+    use SoftDeletes;
     public function post()
     {
         return $this->belongsTo(Post::class);
@@ -24,5 +27,9 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
+    }
+    public function generatorSlug($title, $find_key)
+    {
+        return Str::slug($title) . '-' . base62_int_encode($find_key);
     }
 }
