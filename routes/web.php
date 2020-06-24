@@ -27,6 +27,8 @@ Route::group(['prefix' => 'me', 'namespace' => 'User', 'middleware' => 'auth'], 
         Route::get('/', 'AccountController@index')->name('user.account.index');
         Route::get('/edit', 'AccountController@showEditForm')->name('user.account.edit');
         Route::post('/edit', 'AccountController@Edit')->name('user.account.postEdit');
+        Route::get('/voted', 'LogController@getVotedPost')->name('user.account.voted');
+        Route::get('/commented', 'LogController@getCommentedPost')->name('user.account.commented');
 
     });
 });
