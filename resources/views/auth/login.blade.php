@@ -65,6 +65,8 @@
                             </div>
                         </div>
                     </form>
+                    <hr>
+                    <div class="g-signin2" data-onsuccess="onSignIn"><a href="{{route('admin.redirect')}}">login  with gooogle</a></div>
                 </div>
             </div>
         </div>
