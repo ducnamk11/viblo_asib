@@ -6,10 +6,12 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Maklad\Permission\Models\Permission;
+use Maklad\Permission\Models\Role;
+use Maklad\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
     const DEFAULT_IMAGE = 'avatars/default.png';
     /**
      * The attributes that are mass assignable.
@@ -57,9 +59,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class);
     }
-    
+
     public function postViews()
     {
         return $this->hasMany(PostView::class);
+    }
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
     }
 }
