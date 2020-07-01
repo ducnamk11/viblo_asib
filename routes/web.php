@@ -1,8 +1,15 @@
 <?php
 
 Auth::routes();
-Route::get('/login/social/{provider}', 'Auth\LoginSocialController@redirectToProvider');
-Route::any('/login/social/{provider}/callback', 'Auth\LoginSocialController@handleProviderCallback');
+//Route::get('/login/social/{provider}', 'Auth\LoginSocialController@redirectToProvider');
+//Route::any('/login/social/{provider}/callback', 'Auth\LoginSocialController@handleProviderCallback');
+
+//Route::get('/redirect', 'Auth\LoginSocialController@redirectToProvider')->name('admin.redirect');
+//Route::get('/callback', 'Auth\LoginSocialController@handleProviderCallback');
+
+Route::get('/redirect/{provider}', 'Auth\LoginSocialController@redirectToProvider')->name('admin.redirect');
+Route::get('/callback/{provider}', 'Auth\LoginSocialController@handleProviderCallback');
+
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::any('/search', 'HomeController@search')->name('search');
@@ -59,3 +66,7 @@ Route::group(['prefix' => 'me', 'namespace' => 'User', 'middleware' => 'auth'], 
 
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

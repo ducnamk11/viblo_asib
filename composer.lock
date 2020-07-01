@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "714cf28ef5ba419dbdd0f3197a7f129b",
+    "content-hash": "11dd0a843f7fd53803ae3647d07871c3",
     "packages": [
         {
             "name": "boytunghc/laravel-git-hook",

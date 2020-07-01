@@ -1,6 +1,7 @@
 <div class="col-md-6 mx-auto">
     <div class="card-body text-center">
         <img
+            {{--            src="{{ user()->avatar }}"--}}
             src="{{ url('avatars/'.user()->avatar) }}"
             class="rounded-circle float-left avatar img-thumbnail"
         />

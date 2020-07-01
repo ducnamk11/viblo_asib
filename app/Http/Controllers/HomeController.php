@@ -19,12 +19,12 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-         view()->share([
+        view()->share([
             'new_post'=> $this->getLatestPost(4)  ,
-            'most_viewed'=> Viewer::orderPostByViewer(Post::with('postViews')->get())          
+            'most_viewed'=> Viewer::orderPostByViewer(Post::with('postViews')->get())
         ]);
 
-      }
+    }
 
     public function index()
     {
@@ -46,7 +46,7 @@ class HomeController extends Controller
             $guestViewer->logViewer($post);
         }
 
-         return view('home.post', [
+        return view('home.post', [
             'slug'=>$slug,
             'post' => $post,
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
@@ -95,5 +95,5 @@ class HomeController extends Controller
     private function getLatestPost(int $postNum = 4)
     {
         return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
-    } 
+    }
 }
