@@ -6,12 +6,11 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Maklad\Permission\Models\Permission;
-use Maklad\Permission\Models\Role;
 use Maklad\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
+    use Notifiable, HasRoles;
     const DEFAULT_IMAGE = 'avatars/default.png';
     /**
      * The attributes that are mass assignable.
@@ -64,12 +63,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(PostView::class);
     }
-    public function roles()
-    {
-        return $this->hasMany(Role::class);
-    }
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class);
-    }
+
+    /**
+     * @todo read this & delete
+     * Trong trait nó đã hỗ trợ rồi lại còn ghi đè role
+     * thì bảo sao ko lỗi
+     */
+
+    // public function roles()
+    // {
+        // return $this->hasMany(Role::class);
+    // }
+    // public function permissions()
+    // {
+    //     return $this->hasMany(Permission::class);
+    // }
 }
