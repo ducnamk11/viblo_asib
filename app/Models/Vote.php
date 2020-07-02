@@ -5,7 +5,9 @@ use Jenssegers\Mongodb\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
+/**
+ * @todo Chỉnh lại cho chuẩn psr
+ */
 class Vote extends Model
 {
     use SoftDeletes;

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
+/**
+ * @todo Thiết kế class không chuẩn xem xét lại class này (Phần đặt tên và namespace)
+ */
 class PostController extends Controller
 {
     public function index()

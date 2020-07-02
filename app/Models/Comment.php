@@ -6,6 +6,9 @@ use Jenssegers\Mongodb\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+/**
+ * @todo chỉnh lại cho chuẩn psr
+ */
 class Comment extends Model
 {
     /**

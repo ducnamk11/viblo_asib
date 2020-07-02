@@ -8,7 +8,9 @@ use App\Services\Post\PostManager;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
-
+/**
+ * @todo Xóa các dependency không dùng tới
+ */
 class CommentController extends Controller
 {
   public function postComment(StoreCommentPost $request, $slug)

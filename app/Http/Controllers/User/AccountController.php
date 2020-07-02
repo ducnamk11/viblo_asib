@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Service\UserService;
 
+/**
+ * @todo Chỉnh lại cho chuẩn PSR
+ */
 class AccountController extends Controller
 {
     public function index()

@@ -15,6 +15,9 @@ use App\Models\Vote;
 use App\Services\Post\PostManager;
 use App\Services\Post\Viewer;
 
+/**
+ * @todo chỉnh lại cho chuẩn psr
+ */
 class HomeController extends Controller
 {
     public function __construct()
@@ -34,6 +37,10 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * @todo quá nhiều tham số, bỏ bớt
+     * 1 method/func nên nhận tối đa là 3-4 tham số thôi
+     */
     public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer, PostView $postView)
     {
         if (!($post = $post->findBySlug($slug))) {

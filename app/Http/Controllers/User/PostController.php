@@ -11,6 +11,10 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\StoreCommentPost;
 use App\Services\Post\PostManager;
 
+/**
+ * @todo Chỉnh lại cho chuẩn PSR
+ * @todo Xóa các dependency không dùng tới
+ */
 class PostController extends Controller
 {
     public function index()

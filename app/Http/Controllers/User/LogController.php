@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * @todo xóa các dependency và debug flag không dùng tới
+ */
 class LogController extends Controller
 {
     public function getVotedPost()

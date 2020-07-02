@@ -7,6 +7,9 @@ use App\Models\User;
 use Maklad\Permission\Models\Role;
 use Maklad\Permission\Models\Permission;
 
+/**
+ * @todo Thiết kế class không chuẩn xem xét lại class này (Phần đặt tên và namespace)
+ */
 class UserController extends Controller
 {
     public function index()

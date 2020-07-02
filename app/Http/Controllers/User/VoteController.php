@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Services\Post\PostManager;
 use App\Models\Post;
 
+/**
+ * @todo Chỉnh lại cho chuẩn PSR
+ * @todo Xóa các dependency không dùng tới
+ */
 class VoteController extends Controller
 {
     public function up($id, Vote $vote, Post $post)
