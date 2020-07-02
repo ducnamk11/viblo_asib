@@ -3,65 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentPost;
-use App\Models\Comment;
 use App\Models\User;
-use App\Models\PostView;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Services\Post\GuestViewer;
 use App\Services\Post\UserViewer;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Vote;
 use App\Services\Post\PostManager;
 use App\Services\Post\Viewer;
 
-/**
- * @todo chỉnh lại cho chuẩn psr
- */
 class HomeController extends Controller
 {
     public function __construct()
     {
         view()->share([
-            'new_post'=> $this->getLatestPost(4)  ,
-            'most_viewed'=> Viewer::orderPostByViewer(Post::with('postViews')->get())
+            'new_post' => $this->getLatestPost(4),
+            'most_viewed' => Viewer::orderPostByViewer(Post::with('postViews')->where('status',Post::PUBLISHED)->get())
         ]);
-
     }
 
     public function index()
     {
-
         return view('home.index', [
-            'posts' => Post::with('user')->latest()->paginate(10),
+            'posts' => Post::with('user')->where('status',Post::PUBLISHED)->latest()->paginate(10),
         ]);
     }
 
-    /**
-     * @todo quá nhiều tham số, bỏ bớt
-     * 1 method/func nên nhận tối đa là 3-4 tham số thôi
-     */
-    public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer, PostView $postView)
+    public function postDetail($slug, PostManager $post, UserViewer $userViewer, GuestViewer $guestViewer)
     {
         if (!($post = $post->findBySlug($slug))) {
             return abort(404);
         };
-
         if (user()) {
             $userViewer->logViewer($post);
         } else {
             $guestViewer->logViewer($post);
         }
-
         return view('home.post', [
-            'slug'=>$slug,
+            'slug' => $slug,
             'post' => $post,
             'comments' => $post->comments()->whereNull('parent_id')->latest()->get(),
-            'countView'=> count($post->postViews()->get()),
+            'countView' => count($post->postViews()->get()),
         ]);
     }
-
-
 
     public function authorDetail($_id)
     {
@@ -101,6 +85,6 @@ class HomeController extends Controller
      */
     private function getLatestPost(int $postNum = 4)
     {
-        return Post::with('user')->where('status', Post::NOT_PUBLISHED)->latest()->take($postNum)->get();
+        return Post::with('user')->where('status', Post::PUBLISHED)->latest()->take($postNum)->get();
     }
 }

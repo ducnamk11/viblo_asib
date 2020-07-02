@@ -80,7 +80,7 @@
                         <div style="text-align: center" class="social-login">
                                  <a class="btn btn-danger" href="{{route('admin.redirect',['google'])}}">Google</a> Or
                                 <a class="btn btn-primary" href="{{route('admin.redirect',['facebook'])}}">Facebook</a> Or
-                                <a class="btn btn-success" href="{{route('admin.redirect',['githud'])}}">Githud</a>
+                                <a class="btn btn-success" href="{{route('admin.redirect',['github'])}}">Githud</a>
                          </div>
                     </div>
                 </div>

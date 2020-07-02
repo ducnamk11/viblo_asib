@@ -40,8 +40,8 @@
                         </td>
                         <td>
                             <a type="button" class="btn btn-primary btn-sm">Edit</a>
-                            <a type="button" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
+                            <a href="{{route('admin.role.delete',['_id'=>$role->_id])}}" type="button"
+                               id="delete-role" user-id="{{$role->_id}}" class="btn btn-danger btn-sm">Delete</a>                        </td>
                     </tr>
                 @endforeach
 

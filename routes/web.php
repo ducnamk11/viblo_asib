@@ -18,36 +18,35 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::any('/search', 'HomeController@search')->name('search');
 
-/**
- * @todo Nên xem xét tách nhóm group routes này ra file riêng
- */
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'UserController@index')->name('admin.user');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin','middleware' => ['role:super-admin|admin','auth']], function () {
+    Route::get('/', 'UserManagerController@index')->name('admin.user');
     Route::prefix('/user')->group(function () {
-        Route::get('/edit/{_id}', 'UserController@edit')->name('admin.user.edit');
-        Route::post('/edit/{_id}', 'UserController@update')->name('admin.user.update');
+        Route::get('/edit/{_id}', 'UserManagerController@edit')->name('admin.user.edit');
+        Route::post('/edit/{_id}', 'UserManagerController@update')->name('admin.user.update');
+        Route::any('/delete/{_id}', 'UserManagerController@delete')->name('admin.user.delete');
     });
     Route::prefix('post')->group(function () {
-        Route::get('/', 'PostController@index')->name('admin.post');
-        Route::get('/add', 'PostController@add')->name('admin.post.add');
-        Route::get('/edit', 'PostController@edit')->name('admin.post.edit');
-        Route::get('/delete', 'PostController@index')->name('admin.post.delete');
+        Route::get('/', 'PostManagerController@index')->name('admin.post');
+        Route::get('/view/{_id}', 'PostManagerController@view')->name('admin.post.view');
+        Route::get('/edit/{_id}', 'PostManagerController@edit')->name('admin.post.edit');
+        Route::post('/edit/{_id}', 'PostManagerController@update')->name('admin.post.update');
+        Route::any('/publish/{_id}', 'PostManagerController@publish')->name('admin.post.publish');
+        Route::get('/delete/{_id}', 'PostManagerController@delete')->name('admin.post.delete');
     });
     Route::prefix('permission')->group(function () {
         Route::get('/', 'PermissionController@index')->name('admin.permission');
         Route::post('/', 'PermissionController@store')->name('admin.permission.store');
         Route::get('/edit', 'PermissionController@edit')->name('admin.permission.edit');
-        Route::get('/delete', 'PermissionController@index')->name('admin.permission.delete');
+        Route::get('/delete/{_id}', 'PermissionController@delete')->name('admin.permission.delete');
     });
     Route::prefix('role')->group(function () {
         Route::get('/', 'RoleController@index')->name('admin.role');
         Route::post('/', 'RoleController@store')->name('admin.role.store');
         Route::get('/edit', 'RoleController@edit')->name('admin.role.edit');
-        Route::get('/delete', 'RoleController@index')->name('admin.role.delete');
+        Route::get('/delete/{_id}', 'RoleController@delete')->name('admin.role.delete');
     });
-
-
 });
+
 Route::prefix('p')->group(function () {
     Route::get('/author/{_id}', 'HomeController@authorDetail')->name('author.index');
     Route::get('/{slug}', 'HomeController@postDetail')->name('post.detail');

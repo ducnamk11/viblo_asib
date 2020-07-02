@@ -4,12 +4,48 @@
 
 (function () {
     "use strict"; // use strict to start
+    $("a#delete-permission").click(function () {
+        var id = $(this).attr("permission-id");
+        $.ajax({
+            url: "/admin/permission/delete/" + id,
+            method: "POST",
+            data: {id: id},
+            success: function () {
+                window.location.reload();
+            },
+        });
+    });
+
+    $("a#delete-role").click(function () {
+        var id = $(this).attr("role-id");
+        $.ajax({
+            url: "/admin/role/delete/" + id,
+            method: "POST",
+            data: {id: id},
+            success: function () {
+                window.location.reload();
+            },
+        });
+    });
+
+    $("a#delete-user").click(function () {
+        var id = $(this).attr("user-id");
+        $.ajax({
+            url: "/admin/user/delete/" + id,
+            method: "POST",
+            data: {id: id},
+            success: function () {
+                window.location.reload();
+            },
+        });
+    });
+
     $("i#voteUp").click(function () {
         var id = $(this).attr("voteId");
         $.ajax({
             url: "/p/vote/" + id + "/up",
             method: "GET",
-            data: { id: id },
+            data: {id: id},
             success: function () {
                 window.location.reload();
             },
@@ -20,7 +56,7 @@
         $.ajax({
             url: "/p/vote/" + id + "/down",
             method: "GET",
-            data: { id: id },
+            data: {id: id},
             success: function () {
                 window.location.reload();
             },
@@ -105,7 +141,7 @@
                 .addClass("active")
                 .parent()
                 .next()
-                .css({ display: "block" });
+                .css({display: "block"});
         });
 
         $(".accordion > dt > a").click(function () {

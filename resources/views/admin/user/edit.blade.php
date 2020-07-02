@@ -28,8 +28,9 @@
             <h3>ROLE</h3>
             <div class="form-group form-check">
                 @foreach($roles as $role)
-                    <input type="checkbox" @if(in_array($role->name, user()->roles->pluck('name')->toArray()) )  checked
-                           @endif name="role[]" value="{{$role->name}}"/> {{$role->name}}
+
+                    <input @if(in_array($role->name, $user->roles->pluck('name')->toArray()) )  checked @endif
+                    type="checkbox" name="role[]" value="{{$role->name}}"/> {{$role->name}}
                     <br>
                 @endforeach
             </div>
@@ -39,9 +40,8 @@
             <h3>PERMISSION</h3>
             <div class="form-group form-check">
                 @foreach($permissions as $permission)
-                    <input type="checkbox"
-                           @if(in_array($permission->name, user()->getPermissionNames()->toArray()) )  checked @endif
-                           name="permission[]" value="{{$permission->name}}"/> {{$permission->name}}
+                    <input @if(in_array($permission->name, $user->getPermissionNames()->toArray()) )  checked @endif
+                    type="checkbox" name="permission[]" value="{{$permission->name}}"/> {{$permission->name}}
                     <br>
                 @endforeach
             </div>
