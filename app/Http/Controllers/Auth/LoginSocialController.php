@@ -48,6 +48,7 @@ class LoginSocialController extends LoginController
                 'provider_id' => $getInfo->id,
                 'avatar' => 'default.png',
             ]);
+            $user->assignRole('writer');
         }
         return $user;
     }
