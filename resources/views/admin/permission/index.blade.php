@@ -5,9 +5,9 @@
         <div class="col-md-3">
             <form method="post">
                 @csrf
-                <label for="exampleInputEmail1">Add permission</label>
-                <input required type="text" class="form-control" id="exampleInputEmail1" name="permission">
-
+                <label for="exampleInputEmail1"><h3>Add permission</h3></label>
+                <input required type="text" class="form-control" placeholder="..." id="exampleInputEmail1" name="permission">
+                <br>
                 <button type="submit" class="btn btn-success">Add</button>
             </form>
         </div>
@@ -33,8 +33,9 @@
                         </td>
                         <td>
                             <a type="button" class="btn btn-primary btn-sm">Edit</a>
-                            <a type="button" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
+                            <a href="{{route('admin.permission.delete',['_id'=>$permission->_id])}}" type="button"
+                               id="delete-permission" user-id="{{$permission->_id}}" class="btn btn-danger btn-sm">Delete</a>
+                         </td>
                     </tr>
                 @endforeach
 
