@@ -14,6 +14,9 @@ use App\Services\Post\Viewer;
 
 class HomeController extends Controller
 {
+    /**
+     * @todo Chưa tối ưu câu truy vấn (Trong trường hợp này là lấy tận 2 lần post)
+     */
     public function __construct()
     {
         view()->share([

@@ -52,7 +52,7 @@ class PostManagerController extends Controller
         return redirect()->route('admin.post');
     }
 
-    public function publish(Request $request,$_id)
+    public function publish(Request $request,$_id) // @todo Clean code
     {
         $post = Post::findOrFail($_id);
         if ($post->status == 1) {
