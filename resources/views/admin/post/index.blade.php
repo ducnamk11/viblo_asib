@@ -24,6 +24,7 @@
                     <a href="{{ route('admin.post.view',['_id'=>$post->id]) }}" class="btn btn-primary btn-sm"> view</a>
                     <a href="{{route('admin.post.edit',['_id'=>$post->_id])}}" class=" btn btn-success btn-sm">Edit</a>
                     <a href="{{route('admin.post.delete',['_id'=>$post->_id])}}"
+                       onclick="return confirm('bạn có chắc chắn muốn xóa ?')"
                        class=" btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>

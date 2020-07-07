@@ -21,17 +21,22 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->getRoleNames()}}</td>
-                        <td>{{$user->getPermissionNames()}}</td>
+                        <td>
+                            @foreach($user->getRoleNames() as $name) <p>{{$name}}</p> @endforeach
+                        </td>
+                        <td>
+                            @foreach($user->getPermissionNames() as $name) <p>{{$name}}</p> @endforeach
+                        </td>
                         <td>
                             @can('edit-user')
                                 <a href="{{route('admin.user.edit',['_id'=>$user->_id])}}" type="button"
                                    class="btn btn-primary btn-sm">Edit
                                 </a>
                                 @can('delete-user')
-                                <a href="{{route('admin.user.delete',['_id'=>$user->_id])}}" type="button"
-                                   id="delete-user" user-id="{{$user->_id}}" class="btn btn-danger btn-sm">Delete
-                                </a>
+                                    <a href="{{route('admin.user.delete',['_id'=>$user->_id])}}" type="button"
+                                       onclick="return confirm('bạn có chắc chắn muốn xóa ?')"
+                                       id="delete-user" user-id="{{$user->_id}}" class="btn btn-danger btn-sm">Delete
+                                    </a>
                                 @endcan
                             @endcan
                         </td>

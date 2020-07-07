@@ -6,7 +6,8 @@
             <form method="post">
                 @csrf
                 <label for="exampleInputEmail1"><h3>Add permission</h3></label>
-                <input required type="text" class="form-control" placeholder="..." id="exampleInputEmail1" name="permission">
+                <input required type="text" class="form-control" placeholder="..." id="exampleInputEmail1"
+                       name="permission">
                 <br>
                 <button type="submit" class="btn btn-success">Add</button>
             </form>
@@ -34,8 +35,10 @@
                         <td>
                             <a type="button" class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{route('admin.permission.delete',['_id'=>$permission->_id])}}" type="button"
-                               id="delete-permission" user-id="{{$permission->_id}}" class="btn btn-danger btn-sm">Delete</a>
-                         </td>
+                               id="delete-permission" user-id="{{$permission->_id}}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('bạn có chắc chắn muốn xóa ?')"
+                            >Delete</a>
+                        </td>
                     </tr>
                 @endforeach
 
