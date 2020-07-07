@@ -13,16 +13,15 @@ class PostView extends Migration
      */
     public function up()
     {
-        Schema::table('post_views', function (Blueprint $table) {
-            $table->index('user_id')->nullable();
-            $table->index('post_id');
-            $table->string('ip');
-            $table->string('user_agent');
-            $table->index('view_hash'); // sha1( ip|user_agent )
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->timestamps();
-
+        Schema::table('post_views', function (Blueprint $collection) {
+            $collection->index('user_id')->nullable();
+            $collection->index('post_id');
+            $collection->string('ip');
+            $collection->string('user_agent');
+            $collection->index('view_hash'); // sha1( ip|user_agent )
+            $collection->foreign('user_id')->references('id')->on('users');
+            $collection->foreign('post_id')->references('id')->on('posts');
+            $collection->timestamps();
         });
     }
 
