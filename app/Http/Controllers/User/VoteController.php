@@ -4,38 +4,22 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vote;
-use Illuminate\Http\Request;
-use App\Services\Post\PostManager;
 use App\Models\Post;
 
-/**
- * @todo Chỉnh lại cho chuẩn PSR
- * @todo Xóa các dependency không dùng tới
- */
 class VoteController extends Controller
 {
-    public function up($id, Vote $vote, Post $post)
+    public function vote($postId, $voteValue, Post $post)
     {
+        $postCurrent = $post->findOrFail($postId);
 
-        $postCurrent = $post->findOrFail($id);
-        $vote->where([['post_id', $postCurrent->_id],['user_id', user()->_id]])->delete();
-        $vote->updateOrCreate([
-            'vote' => 1,
+        Vote::where([['post_id', $postCurrent->_id], ['user_id', user()->id]])->forceDelete();
+
+        Vote::create([
+            'vote' => $voteValue,
             'user_id' => user()->_id,
             'post_id' => $postCurrent->_id,
         ]);
-        return redirect()->back();
-    }
 
-    public function down($id, Vote $vote, Post $post)
-    {
-        $postCurrent = $post->findOrFail($id);
-        $vote->where([['post_id', $postCurrent->_id],['user_id', user()->_id]])->delete();
-        $vote->updateOrCreate([
-            'vote' => -1,
-            'user_id' => user()->_id,
-            'post_id' => $postCurrent->_id,
-        ]);
         return redirect()->back();
     }
 }

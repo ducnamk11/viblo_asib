@@ -4,17 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Post;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\StoreCommentPost;
 use App\Services\Post\PostManager;
 
-/**
- * @todo Chỉnh lại cho chuẩn PSR
- * @todo Xóa các dependency không dùng tới
- */
 class PostController extends Controller
 {
     public function index()
@@ -37,10 +30,10 @@ class PostController extends Controller
     {
         $post->create(array_merge($request->all(), [
             'status' => Post::NOT_PUBLISHED,
-            'slug'   => Str::slug($request->title),
+            'slug' => Str::slug($request->title),
         ]), user());
 
         return redirect()->route('user.account.index');
     }
- 
+
 }

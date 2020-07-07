@@ -40,23 +40,13 @@
         });
     });
 
-    $("i#voteUp").click(function () {
-        var id = $(this).attr("voteId");
+    $("i.vote").click(function () {
+        var postId = $(this).attr("postId");
+        var voteValue = $(this).attr("voteValue");
         $.ajax({
-            url: "/p/vote/" + id + "/up",
+            url: "/p/vote/" + postId + "/" + voteValue,
             method: "GET",
-            data: {id: id},
-            success: function () {
-                window.location.reload();
-            },
-        });
-    });
-    $("i#voteDown").click(function () {
-        var id = $(this).attr("voteId");
-        $.ajax({
-            url: "/p/vote/" + id + "/down",
-            method: "GET",
-            data: {id: id},
+            data: {postId: postId, voteValue: voteValue},
             success: function () {
                 window.location.reload();
             },
