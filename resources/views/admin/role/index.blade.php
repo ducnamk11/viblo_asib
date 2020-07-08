@@ -7,7 +7,8 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1"><h3>Add role</h3></label>
-                    <input required type="text" placeholder="Add role" class="form-control" id="exampleInputEmail1" name="role">
+                    <input required type="text" placeholder="Add role" class="form-control" id="exampleInputEmail1"
+                           name="role">
                 </div>
                 <div class="form-group form-check">
                     @foreach($permissions as $permission)
@@ -29,7 +30,9 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 @foreach($roles as $role)
+
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$role->name}}</td>
@@ -39,10 +42,12 @@
                             @endforeach
                         </td>
                         <td>
-                            <a type="button" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{route('admin.role.edit',['_id'=>$role->_id])}}" type="button"
+                               class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{route('admin.role.delete',['_id'=>$role->_id])}}" type="button"
                                onclick="return confirm('bạn có chắc chắn muốn xóa ?')"
-                               id="delete-role" user-id="{{$role->_id}}" class="btn btn-danger btn-sm">Delete</a>                        </td>
+                               id="delete-role" user-id="{{$role->_id}}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
 
